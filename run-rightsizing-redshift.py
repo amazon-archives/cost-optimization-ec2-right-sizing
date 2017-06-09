@@ -12,7 +12,11 @@
 #  OR CONDITIONS OF ANY KIND, express or implied. See the License for the specific language governing permissions    #
 #  and limitations under the License.                                                                                #
 ######################################################################################################################
-
+#
+# v1.0 initial version - AWS Solutions Builders
+# v1.1 fix f1.2xlarge zero price issue - AWS Solutions Builders
+#
+######################################################################################################################
 
 import psycopg2
 import math
@@ -131,7 +135,7 @@ def import_cwdata(db_conn, sourcefile, ignorerows, gzflag):
     ls_create_cwtab_sql += " timestamp varchar(300), accountId varchar(300), "
     ls_create_cwtab_sql += " az varchar(300), instanceId varchar(300) distkey, "
     ls_create_cwtab_sql += " instanceType varchar(300), instanceTags varchar(1000), "
-    ls_create_cwtab_sql += " ebsBacked varchar(300), volumeIds varchar(300), "
+    ls_create_cwtab_sql += " ebsBacked varchar(300), volumeIds varchar(1024), "
     ls_create_cwtab_sql += " instanceLaunchTime varchar(300), humanReadableInstanceLaunchTime varchar(300), "
     ls_create_cwtab_sql += " CPUUtilization varchar(300), NetworkIn varchar(300), "
     ls_create_cwtab_sql += " NetworkOut varchar(300), DiskReadOps varchar(300), DiskWriteOps varchar(300) ) "
@@ -215,7 +219,9 @@ def import_ec2pricelist(db_conn, p_ec2pricelist_file):
     ls_update_pricelist_sql += " when location='Asia Pacific (Mumbai)' then 'APS1' "
     ls_update_pricelist_sql += " end "
     execute_dml_ddl(db_conn, ls_update_pricelist_sql)
-
+    ls_delete_zero_entry_pricelist_sql = "delete from " + ls_temp_price_table + " where to_number(trim(both ' ' from priceperunit),'9999999D99999999') <= 0.00"
+    execute_dml_ddl(db_conn, ls_delete_zero_entry_pricelist_sql)
+    
     return ls_temp_price_table
 
 def determine_right_type(db_conn, sql_stat, s_temp_table, s_instanceid, iops_usage, ssd_size_usage, cpu_nbr_usage, network_level_usage, rate_usage, mem_size):
