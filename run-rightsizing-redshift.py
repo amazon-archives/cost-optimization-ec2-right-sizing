@@ -243,7 +243,7 @@ def determine_right_type(db_conn, sql_stat, s_temp_table, s_instanceid, iops_usa
         ln_min_cpu = int(record[4])
         ln_min_network_level = int(record[5])
         ls_min_network = record[6]
-        ln_min_mem = float(record[7].split(' ')[0])
+        ln_min_mem = float(record[7].split(' ')[0].replace(',',''))
         ln_min_rate = float(record[2])
         if ls_min_storage.find('SSD')>0:
             ls_min_storage1 = ls_min_storage[:(ls_min_storage.find('SSD')-1)]
@@ -334,7 +334,7 @@ def right_sizing(db_conn, pricelist_table, cw_tablename):
         sys.stdout.flush()
         ln_cpu = int(row[2])
         ls_storage = row[4]
-        ln_mem = float(row[3].split(' ')[0])
+        ln_mem = float(row[3].split(' ')[0].replace(',',''))
         
         if ls_storage.find('SSD')>0:
             ls_storage1 = ls_storage[:(ls_storage.find('SSD')-1)]
