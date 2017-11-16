@@ -36,247 +36,67 @@
     },
     "Mappings": {
         "AWSInstanceType2Arch": {
-            "t1.micro": {
-                "Arch": "PV64"
-            },
-            "t2.nano": {
-                "Arch": "HVM64"
-            },
-            "t2.micro": {
-                "Arch": "HVM64"
-            },
-            "t2.small": {
-                "Arch": "HVM64"
-            },
-            "t2.medium": {
-                "Arch": "HVM64"
-            },
-            "t2.large": {
-                "Arch": "HVM64"
-            },
-            "m1.small": {
-                "Arch": "PV64"
-            },
-            "m1.medium": {
-                "Arch": "PV64"
-            },
-            "m1.large": {
-                "Arch": "PV64"
-            },
-            "m1.xlarge": {
-                "Arch": "PV64"
-            },
-            "m2.xlarge": {
-                "Arch": "PV64"
-            },
-            "m2.2xlarge": {
-                "Arch": "PV64"
-            },
-            "m2.4xlarge": {
-                "Arch": "PV64"
-            },
-            "m3.medium": {
-                "Arch": "HVM64"
-            },
-            "m3.large": {
-                "Arch": "HVM64"
-            },
-            "m3.xlarge": {
-                "Arch": "HVM64"
-            },
-            "m3.2xlarge": {
-                "Arch": "HVM64"
-            },
             "m4.large": {
                 "Arch": "HVM64"
-            },
-            "m4.xlarge": {
-                "Arch": "HVM64"
-            },
-            "m4.2xlarge": {
-                "Arch": "HVM64"
-            },
-            "m4.4xlarge": {
-                "Arch": "HVM64"
-            },
-            "m4.10xlarge": {
-                "Arch": "HVM64"
-            },
-            "c1.medium": {
-                "Arch": "PV64"
-            },
-            "c1.xlarge": {
-                "Arch": "PV64"
-            },
-            "c3.large": {
-                "Arch": "HVM64"
-            },
-            "c3.xlarge": {
-                "Arch": "HVM64"
-            },
-            "c3.2xlarge": {
-                "Arch": "HVM64"
-            },
-            "c3.4xlarge": {
-                "Arch": "HVM64"
-            },
-            "c3.8xlarge": {
-                "Arch": "HVM64"
-            },
-            "c4.large": {
-                "Arch": "HVM64"
-            },
-            "c4.xlarge": {
-                "Arch": "HVM64"
-            },
-            "c4.2xlarge": {
-                "Arch": "HVM64"
-            },
-            "c4.4xlarge": {
-                "Arch": "HVM64"
-            },
-            "c4.8xlarge": {
-                "Arch": "HVM64"
-            },
-            "g2.2xlarge": {
-                "Arch": "HVMG2"
-            },
-            "g2.8xlarge": {
-                "Arch": "HVMG2"
-            },
-            "r3.large": {
-                "Arch": "HVM64"
-            },
-            "r3.xlarge": {
-                "Arch": "HVM64"
-            },
-            "r3.2xlarge": {
-                "Arch": "HVM64"
-            },
-            "r3.4xlarge": {
-                "Arch": "HVM64"
-            },
-            "r3.8xlarge": {
-                "Arch": "HVM64"
-            },
-            "i2.xlarge": {
-                "Arch": "HVM64"
-            },
-            "i2.2xlarge": {
-                "Arch": "HVM64"
-            },
-            "i2.4xlarge": {
-                "Arch": "HVM64"
-            },
-            "i2.8xlarge": {
-                "Arch": "HVM64"
-            },
-            "d2.xlarge": {
-                "Arch": "HVM64"
-            },
-            "d2.2xlarge": {
-                "Arch": "HVM64"
-            },
-            "d2.4xlarge": {
-                "Arch": "HVM64"
-            },
-            "d2.8xlarge": {
-                "Arch": "HVM64"
-            },
-            "hi1.4xlarge": {
-                "Arch": "HVM64"
-            },
-            "hs1.8xlarge": {
-                "Arch": "HVM64"
-            },
-            "cr1.8xlarge": {
-                "Arch": "HVM64"
-            },
-            "cc2.8xlarge": {
-                "Arch": "HVM64"
             }
         },
-
         "AWSRegionArch2AMI": {
             "us-east-1": {
-                "PV64": "ami-5fb8c835",
-                "HVM64": "ami-60b6c60a",
-                "HVMG2": "ami-e998ea83"
+                "HVM64": "ami-6057e21a"
             },
             "us-east-2": {
-                "PV64": "ami-5fb8c835",
-                "HVM64": "ami-71ca9114",
-                "HVMG2": "ami-e998ea83"
+                "HVM64": "ami-aa1b34cf"
             },
             "us-west-2": {
-                "PV64": "ami-d93622b8",
-                "HVM64": "ami-f0091d91",
-                "HVMG2": "ami-315f4850"
+                "HVM64": "ami-32d8124a"
             },
             "us-west-1": {
-                "PV64": "ami-56ea8636",
-                "HVM64": "ami-d5ea86b5",
-                "HVMG2": "ami-943956f4"
+                "HVM64": "ami-1a033c7a"
             },
             "eu-west-1": {
-                "PV64": "ami-95e33ce6",
-                "HVM64": "ami-bff32ccc",
-                "HVMG2": "ami-83fd23f0"
+                "HVM64": "ami-760aaa0f"
+            },
+            "eu-west-2": {
+                "HVM64": "ami-e3051987"
             },
             "eu-central-1": {
-                "PV64": "ami-794a5915",
-                "HVM64": "ami-bc5b48d0",
-                "HVMG2": "ami-ba1a09d6"
+                "HVM64": "ami-e28d098d"
             },
             "ap-northeast-1": {
-                "PV64": "ami-393c1957",
-                "HVM64": "ami-383c1956",
-                "HVMG2": "ami-08e5c166"
+                "HVM64": "ami-2803ac4e"
             },
             "ap-northeast-2": {
-                "PV64": "NOT_SUPPORTED",
-                "HVM64": "ami-249b554a",
-                "HVMG2": "NOT_SUPPORTED"
+                "HVM64": "ami-fc862292"
             },
             "ap-southeast-1": {
-                "PV64": "ami-34bd7a57",
-                "HVM64": "ami-c9b572aa",
-                "HVMG2": "ami-5a15d239"
+                "HVM64": "ami-dd7935be"
             },
             "ap-southeast-2": {
-                "PV64": "ami-ced887ad",
-                "HVM64": "ami-48d38c2b",
-                "HVMG2": "ami-0c1a446f"
+                "HVM64": "ami-1a668878"
+            },
+            "ap-south-1": {
+                "HVM64": "ami-2ed19c41"
             },
             "sa-east-1": {
-                "PV64": "ami-7d15ad11",
-                "HVM64": "ami-6817af04",
-                "HVMG2": "NOT_SUPPORTED"
+                "HVM64": "ami-1678037a"
             },
-            "cn-north-1": {
-                "PV64": "ami-18ac6575",
-                "HVM64": "ami-43a36a2e",
-                "HVMG2": "NOT_SUPPORTED"
-            }
-        },
-        "ec2instanceSizing": {
-            "redshift": {
-                "Small": "t2.large",
-                "Medium": "m3.large",
-                "Large": "m3.xlarge"
+            "ca-central-1": {
+                "HVM64": "ami-ef3b838b"
             }
         }
     },
     "Conditions": {
         "Terminate": {
-            "Fn::Equals": [{
+            "Fn::Equals": [
+                {
                     "Ref": "TerminateResources"
                 },
                 "Yes"
             ]
         },
         "SendData": {
-            "Fn::Equals": [{
+            "Fn::Equals": [
+                {
                     "Ref": "SendAnonymousData"
                 },
                 "Yes"
@@ -285,7 +105,8 @@
     },
     "Metadata": {
         "AWS::CloudFormation::Interface": {
-            "ParameterGroups": [{
+            "ParameterGroups": [
+                {
                     "Label": {
                         "default": "Solution Configuration"
                     },
@@ -294,7 +115,8 @@
                         "KeyName",
                         "TerminateResources"
                     ]
-                }, {
+                },
+                {
                     "Label": {
                         "default": "Anonymous Metrics Request"
                     },
@@ -302,7 +124,6 @@
                         "SendAnonymousData"
                     ]
                 }
-
             ],
             "ParameterLabels": {
                 "InboundTraffic": {
@@ -318,12 +139,19 @@
                     "default": "Send Anonymous Usage Data"
                 }
             }
-
         }
     },
     "Resources": {
         "S3Bucket": {
-            "Type": "AWS::S3::Bucket"
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Cost Optimization: EC2 Right Sizing - S3 Bucket"
+                    }
+                ]
+            }
         },
         "S3BucketPolicy": {
             "Type": "AWS::S3::BucketPolicy",
@@ -333,56 +161,84 @@
                 },
                 "PolicyDocument": {
                     "Version": "2012-10-17",
-                    "Statement": [{
-                        "Action": ["s3:GetObject", "s3:PutObject", "s3:PutObjectAcl"],
-                        "Effect": "Allow",
-                        "Resource": {
-                            "Fn::Join": ["", ["arn:aws:s3:::", {
-                                "Ref": "S3Bucket"
-                            }, "/*"]]
-                        },
-                        "Principal": {
-                            "AWS": [{
-                                "Fn::Join": ["", ["arn:aws:iam::", {
-                                    "Ref": "AWS::AccountId"
-                                }, ":root"]]
-                            }]
-                        }
-                    }, {
-                        "Effect": "Allow",
-                        "Action": [
-                            "s3:GetBucketAcl",
-                            "s3:GetBucketPolicy"
-                        ],
-                        "Principal": {
-                            "AWS": "386209384616"
-                        },
-                        "Resource": {
-                            "Fn::Join": [
-                                "", [
-                                    "arn:aws:s3:::", {
-                                        "Ref": "S3Bucket"
+                    "Statement": [
+                        {
+                            "Action": [
+                                "s3:GetObject",
+                                "s3:PutObject",
+                                "s3:PutObjectAcl"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": {
+                                "Fn::Join": [
+                                    "",
+                                    [
+                                        "arn:aws:s3:::",
+                                        {
+                                            "Ref": "S3Bucket"
+                                        },
+                                        "/*"
+                                    ]
+                                ]
+                            },
+                            "Principal": {
+                                "AWS": [
+                                    {
+                                        "Fn::Join": [
+                                            "",
+                                            [
+                                                "arn:aws:iam::",
+                                                {
+                                                    "Ref": "AWS::AccountId"
+                                                },
+                                                ":root"
+                                            ]
+                                        ]
                                     }
                                 ]
-                            ]
-                        }
-                    }, {
-                        "Effect": "Allow",
-                        "Action": "s3:PutObject",
-                        "Principal": {
-                            "AWS": "386209384616"
+                            }
                         },
-                        "Resource": {
-                            "Fn::Join": [
-                                "", [
-                                    "arn:aws:s3:::", {
-                                        "Ref": "S3Bucket"
-                                    },
-                                    "/*"
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "s3:GetBucketAcl",
+                                "s3:GetBucketPolicy"
+                            ],
+                            "Principal": {
+                                "AWS": "386209384616"
+                            },
+                            "Resource": {
+                                "Fn::Join": [
+                                    "",
+                                    [
+                                        "arn:aws:s3:::",
+                                        {
+                                            "Ref": "S3Bucket"
+                                        }
+                                    ]
                                 ]
-                            ]
+                            }
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Action": "s3:PutObject",
+                            "Principal": {
+                                "AWS": "386209384616"
+                            },
+                            "Resource": {
+                                "Fn::Join": [
+                                    "",
+                                    [
+                                        "arn:aws:s3:::",
+                                        {
+                                            "Ref": "S3Bucket"
+                                        },
+                                        "/*"
+                                    ]
+                                ]
+                            }
                         }
-                    }]
+                    ]
                 }
             }
         },
@@ -391,17 +247,19 @@
             "Properties": {
                 "AssumeRolePolicyDocument": {
                     "Version": "2012-10-17",
-                    "Statement": [{
-                        "Effect": "Allow",
-                        "Principal": {
-                            "Service": [
-                                "ec2.amazonaws.com"
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "ec2.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
                             ]
-                        },
-                        "Action": [
-                            "sts:AssumeRole"
-                        ]
-                    }]
+                        }
+                    ]
                 },
                 "Path": "/"
             }
@@ -411,66 +269,113 @@
             "Properties": {
                 "AssumeRolePolicyDocument": {
                     "Version": "2012-10-17",
-                    "Statement": [{
-                        "Effect": "Allow",
-                        "Principal": {
-                            "Service": [
-                                "ec2.amazonaws.com"
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "ec2.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
                             ]
-                        },
-                        "Action": [
-                            "sts:AssumeRole"
-                        ]
-                    }]
+                        }
+                    ]
                 },
                 "Path": "/",
-                "Policies": [{
-                    "PolicyName": "EC2InstanceRole",
-                    "PolicyDocument": {
-                        "Version": "2012-10-17",
-                        "Statement": [{
-                            "Effect": "Allow",
-                            "Action": [
-                                "s3:PutObject",
-                                "s3:PutObjectAcl",
-                                "s3:GetObject"
-                            ],
-                            "Resource": {
-                                "Fn::Join": ["", ["arn:aws:s3:::", {
-                                    "Ref": "S3Bucket"
-                                }, "/*"]]
-                            }
-                        }, {
-                            "Effect": "Allow",
-                            "Action": [
-                                "s3:ListBucket"
-                            ],
-                            "Resource": {
-                                "Fn::Join": ["", ["arn:aws:s3:::", {
-                                    "Ref": "S3Bucket"
-                                }]]
-                            }
-                        }, {
-                            "Effect": "Allow",
-                            "Action": [
-                                "ec2:Describe*",
-                                "redshift:DeleteCluster",
-                                "ec2:TerminateInstances",
-                                "cloudwatch:GetMetricStatistics"
-                            ],
-                            "Resource": "*"
-                        }]
+                "Policies": [
+                    {
+                        "PolicyName": "EC2InstanceRole",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "s3:PutObject",
+                                        "s3:PutObjectAcl",
+                                        "s3:GetObject"
+                                    ],
+                                    "Resource": {
+                                        "Fn::Join": [
+                                            "",
+                                            [
+                                                "arn:aws:s3:::",
+                                                {
+                                                    "Ref": "S3Bucket"
+                                                },
+                                                "/*"
+                                            ]
+                                        ]
+                                    }
+                                },
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "s3:ListBucket"
+                                    ],
+                                    "Resource": {
+                                        "Fn::Join": [
+                                            "",
+                                            [
+                                                "arn:aws:s3:::",
+                                                {
+                                                    "Ref": "S3Bucket"
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                },
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "logs:CreateLogGroup",
+                                        "logs:CreateLogStream",
+                                        "logs:PutLogEvents"
+                                    ],
+                                    "Resource": {
+                                        "Fn::Join": [
+                                            "",
+                                            [
+                                                "arn:aws:logs:",
+                                                {
+                                                    "Ref": "AWS::Region"
+                                                },
+                                                ":",
+                                                {
+                                                    "Ref": "AWS::AccountId"
+                                                },
+                                                ":log-group:cost-optimization-ec2-right-sizing:*"
+                                            ]
+                                        ]
+                                    }
+                                },
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "ec2:Describe*",
+                                        "redshift:DeleteCluster",
+                                        "ec2:TerminateInstances",
+                                        "cloudwatch:GetMetricStatistics"
+                                    ],
+                                    "Resource": "*"
+                                }
+                            ]
+                        }
                     }
-                }]
+                ]
             }
         },
         "EC2InstanceInstanceProfile": {
             "Type": "AWS::IAM::InstanceProfile",
             "Properties": {
                 "Path": "/",
-                "Roles": [{
-                    "Ref": "EC2InstanceRole"
-                }]
+                "Roles": [
+                    {
+                        "Ref": "EC2InstanceRole"
+                    }
+                ]
             }
         },
         "EC2InstanceSecurityGroup": {
@@ -480,26 +385,38 @@
                 "VpcId": {
                     "Ref": "VPC"
                 },
-                "SecurityGroupIngress": [{
-                    "IpProtocol": "tcp",
-                    "FromPort": "80",
-                    "ToPort": "80",
-                    "CidrIp": {
-                        "Ref": "InboundTraffic"
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "80",
+                        "ToPort": "80",
+                        "CidrIp": {
+                            "Ref": "InboundTraffic"
+                        }
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "22",
+                        "ToPort": "22",
+                        "CidrIp": {
+                            "Ref": "InboundTraffic"
+                        }
                     }
-                }, {
-                    "IpProtocol": "tcp",
-                    "FromPort": "22",
-                    "ToPort": "22",
-                    "CidrIp": {
-                        "Ref": "InboundTraffic"
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Cost Optimization: EC2 Right Sizing - Security Group"
                     }
-                }]
+                ]
             }
         },
         "EC2Instance": {
             "Type": "AWS::EC2::Instance",
-            "DependsOn": ["PublicSubnetRouteTableAssociation", "RedshiftCluster"],
+            "DependsOn": [
+                "PublicSubnetRouteTableAssociation",
+                "RedshiftCluster"
+            ],
             "Metadata": {
                 "AWS::CloudFormation::Init": {
                     "configSets": {
@@ -514,13 +431,16 @@
                             "/etc/cfn/cfn-hup.conf": {
                                 "content": {
                                     "Fn::Join": [
-                                        "", [
+                                        "",
+                                        [
                                             "[main]\n",
-                                            "stack=", {
+                                            "stack=",
+                                            {
                                                 "Ref": "AWS::StackId"
                                             },
                                             "\n",
-                                            "region=", {
+                                            "region=",
+                                            {
                                                 "Ref": "AWS::Region"
                                             },
                                             "\n"
@@ -534,17 +454,20 @@
                             "/etc/cfn/hooks.d/cfn-auto-reloader.conf": {
                                 "content": {
                                     "Fn::Join": [
-                                        "", [
+                                        "",
+                                        [
                                             "[cfn-auto-reloader-hook]\n",
                                             "triggers=post.update\n",
                                             "path=Resources.EC2Instance.Metadata.AWS::CloudFormation::Init\n",
                                             "action=/opt/aws/bin/cfn-init -v ",
-                                            "         --stack ", {
+                                            "         --stack ",
+                                            {
                                                 "Ref": "AWS::StackName"
                                             },
                                             "         --resource EC2Instance ",
                                             "         --configsets rightsizing_install ",
-                                            "         --region ", {
+                                            "         --region ",
+                                            {
                                                 "Ref": "AWS::Region"
                                             },
                                             "\n"
@@ -575,14 +498,16 @@
                                 "nginx": [],
                                 "python27": [],
                                 "python27-psycopg2": [],
-                                "git": []
+                                "git": [],
+                                "awslogs": []
                             }
                         },
                         "files": {
                             "/tmp/perform-rightsizing.sh": {
                                 "content": {
                                     "Fn::Join": [
-                                        "", [
+                                        "",
+                                        [
                                             "#!/bin/bash\n",
                                             "pip install requests jmespath boto3\n",
                                             "cd /tmp\n",
@@ -590,39 +515,72 @@
                                             "wget https://s3.amazonaws.com/solutions-reference/cost-optimization/latest/callgcw.py\n",
                                             "wget https://s3.amazonaws.com/solutions-reference/cost-optimization/latest/getcloudwatchmetrics.py\n",
                                             "wget https://s3.amazonaws.com/solutions-reference/cost-optimization/latest/deleteandterminate.py\n",
-                                            "sed -i 's/cfn_s3_bucket_name/", {
-                                                "Fn::GetAtt": ["S3Bucket", "DomainName"]
-                                            }, "/g' /tmp/run-rightsizing-redshift.py\n",
+                                            "sed -i 's/cfn_s3_bucket_name/",
+                                            {
+                                                "Fn::GetAtt": [
+                                                    "S3Bucket",
+                                                    "DomainName"
+                                                ]
+                                            },
+                                            "/g' /tmp/run-rightsizing-redshift.py\n",
                                             "sed -i \"s/.s3.amazonaws.com//\" /tmp/run-rightsizing-redshift.py\n",
-                                            "sed -i 's/cfn_account/", {
+                                            "sed -i 's/cfn_account/",
+                                            {
                                                 "Ref": "AWS::AccountId"
-                                            }, "/g' /tmp/run-rightsizing-redshift.py\n",
+                                            },
+                                            "/g' /tmp/run-rightsizing-redshift.py\n",
                                             "sed -i 's/cfn_db_user/redshiftuser/g' /tmp/run-rightsizing-redshift.py\n",
-                                            "sed -i 's/cfn_db_pass/", {
-                                                "Fn::GetAtt": ["CreateRandomPassword", "Password"]
-                                            }, "/g' /tmp/run-rightsizing-redshift.py\n",
+                                            "sed -i 's/cfn_db_pass/",
+                                            {
+                                                "Fn::GetAtt": [
+                                                    "CreateRandomPassword",
+                                                    "Password"
+                                                ]
+                                            },
+                                            "/g' /tmp/run-rightsizing-redshift.py\n",
                                             "sed -i 's/cfn_db_name/rightsizing/g' /tmp/run-rightsizing-redshift.py\n",
-                                            "sed -i 's/cfn_db_host/", {
-                                                "Fn::GetAtt": ["RedshiftCluster", "Endpoint.Address"]
-                                            }, "/g' /tmp/run-rightsizing-redshift.py\n",
-                                            "sed -i 's/cfn_db_port/", {
-                                                "Fn::GetAtt": ["RedshiftCluster", "Endpoint.Port"]
-                                            }, "/g' /tmp/run-rightsizing-redshift.py\n",
-                                            "sed -i 's/cfn_region/", {
+                                            "sed -i 's/cfn_db_host/",
+                                            {
+                                                "Fn::GetAtt": [
+                                                    "RedshiftCluster",
+                                                    "Endpoint.Address"
+                                                ]
+                                            },
+                                            "/g' /tmp/run-rightsizing-redshift.py\n",
+                                            "sed -i 's/cfn_db_port/",
+                                            {
+                                                "Fn::GetAtt": [
+                                                    "RedshiftCluster",
+                                                    "Endpoint.Port"
+                                                ]
+                                            },
+                                            "/g' /tmp/run-rightsizing-redshift.py\n",
+                                            "sed -i 's/cfn_region/",
+                                            {
                                                 "Ref": "AWS::Region"
-                                            }, "/g' /tmp/run-rightsizing-redshift.py\n",
-                                            "sed -i 's/cfn_region/", {
+                                            },
+                                            "/g' /tmp/run-rightsizing-redshift.py\n",
+                                            "sed -i 's/cfn_region/",
+                                            {
                                                 "Ref": "AWS::Region"
-                                            }, "/g' /tmp/callgcw.py\n",
-                                            "sed -i 's/cfn_region/", {
+                                            },
+                                            "/g' /tmp/callgcw.py\n",
+                                            "sed -i 's/cfn_region/",
+                                            {
                                                 "Ref": "AWS::Region"
-                                            }, "/g' /tmp/deleteandterminate.py\n",
-                                            "sed -i 's/cfn_db_clusteridentifier/", {
+                                            },
+                                            "/g' /tmp/deleteandterminate.py\n",
+                                            "sed -i 's/cfn_db_clusteridentifier/",
+                                            {
                                                 "Ref": "RedshiftCluster"
-                                            }, "/g' /tmp/deleteandterminate.py\n",
-                                            "python /tmp/run-rightsizing-redshift.py &>/tmp/run-rightsizing-redshift.log\n", {
-                                                "Fn::If": ["Terminate",
-                                                    "python /tmp/deleteandterminate.py &>/tmp/deleteandterminate.log\n", {
+                                            },
+                                            "/g' /tmp/deleteandterminate.py\n",
+                                            "python /tmp/run-rightsizing-redshift.py &>/tmp/run-rightsizing-redshift.log\n",
+                                            {
+                                                "Fn::If": [
+                                                    "Terminate",
+                                                    "python /tmp/deleteandterminate.py &>/tmp/deleteandterminate.log\n",
+                                                    {
                                                         "Ref": "AWS::NoValue"
                                                     }
                                                 ]
@@ -634,11 +592,76 @@
                                 "mode": "000700",
                                 "owner": "root",
                                 "group": "root"
+                            },
+                            "/etc/awslogs/awslogs.conf": {
+                                "content": {
+                                    "Fn::Join": [
+                                        "",
+                                        [
+                                            "[general]\n",
+                                            "state_file= /var/awslogs/agent-state\n",
+                                            "[/var/log/cfn-init.log]\n",
+                                            "file = /var/log/cfn-init.log\n",
+                                            "log_group_name = cost-optimization-ec2-right-sizing\n",
+                                            "log_stream_name = {instance_id}/cfn-init.log\n",
+                                            "datetime_format = %d/%b/%Y:%H:%M:%S\n",
+                                            "[/tmp/run-rightsizing-redshift.log]\n",
+                                            "file = /tmp/run-rightsizing-redshift.log\n",
+                                            "log_group_name = cost-optimization-ec2-right-sizing\n",
+                                            "log_stream_name = {instance_id}/run-rightsizing-redshift.log\n",
+                                            "datetime_format = %d/%b/%Y:%H:%M:%S\n",
+                                            "[/tmp/deleteandterminate.log]\n",
+                                            "file = /tmp/deleteandterminate.log\n",
+                                            "log_group_name = cost-optimization-ec2-right-sizing\n",
+                                            "log_stream_name = {instance_id}/deleteandterminate.log\n",
+                                            "datetime_format = %d/%b/%Y:%H:%M:%S\n"
+                                        ]
+                                    ]
+                                },
+                                "mode": "000644",
+                                "owner": "root",
+                                "group": "root"
+                            },
+                            "/etc/awslogs/awscli.conf": {
+                                "content": {
+                                    "Fn::Join": [
+                                        "",
+                                        [
+                                            "[plugins]\n",
+                                            "cwlogs = cwlogs\n",
+                                            "[default]\n",
+                                            "region = ",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            }
+                                        ]
+                                    ]
+                                },
+                                "mode": "000644",
+                                "owner": "root",
+                                "group": "root"
+                            },
+                            "/var/awslogs/agent-state": {
+                                "content": {
+                                    "Fn::Join": [
+                                        "",
+                                        [
+                                            " "
+                                        ]
+                                    ]
+                                },
+                                "mode": "000644",
+                                "owner": "root",
+                                "group": "root"
                             }
                         },
                         "services": {
                             "sysvinit": {
                                 "nginx": {
+                                    "enabled": "true",
+                                    "ensureRunning": "true"
+                                },
+                                "awslogs": {
                                     "enabled": "true",
                                     "ensureRunning": "true"
                                 }
@@ -658,67 +681,84 @@
             "Properties": {
                 "ImageId": {
                     "Fn::FindInMap": [
-                        "AWSRegionArch2AMI", {
+                        "AWSRegionArch2AMI",
+                        {
                             "Ref": "AWS::Region"
-                        }, {
+                        },
+                        {
                             "Fn::FindInMap": [
                                 "AWSInstanceType2Arch",
-                                "m3.large",
+                                "m4.large",
                                 "Arch"
                             ]
                         }
                     ]
                 },
-                "InstanceType": "m3.large",
+                "InstanceType": "m4.large",
                 "IamInstanceProfile": {
                     "Ref": "EC2InstanceInstanceProfile"
                 },
-                "NetworkInterfaces": [{
-                    "AssociatePublicIpAddress": "true",
-                    "DeviceIndex": "0",
-                    "GroupSet": [{
-                        "Ref": "EC2InstanceSecurityGroup"
-                    }],
-                    "SubnetId": {
-                        "Ref": "PublicSubnet"
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "true",
+                        "DeviceIndex": "0",
+                        "GroupSet": [
+                            {
+                                "Ref": "EC2InstanceSecurityGroup"
+                            }
+                        ],
+                        "SubnetId": {
+                            "Ref": "PublicSubnet"
+                        }
                     }
-                }],
+                ],
                 "KeyName": {
                     "Ref": "KeyName"
                 },
                 "UserData": {
                     "Fn::Base64": {
                         "Fn::Join": [
-                            "", [
+                            "",
+                            [
                                 "#!/bin/bash -xe\n",
                                 "yum update -y aws-cfn-bootstrap\n",
                                 "/opt/aws/bin/cfn-init -v ",
-                                "         --stack ", {
+                                "         --stack ",
+                                {
                                     "Ref": "AWS::StackName"
                                 },
                                 "         --resource EC2Instance ",
                                 "         --configsets rightsizing_install ",
-                                "         --region ", {
+                                "         --region ",
+                                {
                                     "Ref": "AWS::Region"
                                 },
                                 "\n",
                                 "/opt/aws/bin/cfn-signal -e $? ",
-                                "         --stack ", {
+                                "         --stack ",
+                                {
                                     "Ref": "AWS::StackName"
                                 },
                                 "         --resource EC2Instance ",
-                                "         --region ", {
+                                "         --region ",
+                                {
                                     "Ref": "AWS::Region"
                                 },
                                 "\n"
                             ]
                         ]
                     }
-                }
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Cost Optimization: EC2 Right Sizing - Instance"
+                    }
+                ]
             },
             "CreationPolicy": {
                 "ResourceSignal": {
-                    "Timeout": "PT1H"
+                    "Timeout": "PT8H"
                 }
             }
         },
@@ -728,28 +768,42 @@
             "Properties": {
                 "ClusterType": "multi-node",
                 "AvailabilityZone": {
-                    "Fn::Select": ["1", {
-                        "Fn::GetAZs": ""
-                    }]
+                    "Fn::Select": [
+                        "0",
+                        {
+                            "Fn::GetAZs": ""
+                        }
+                    ]
                 },
                 "NumberOfNodes": "2",
                 "NodeType": "dc1.large",
                 "DBName": "rightsizing",
                 "MasterUsername": "redshiftuser",
                 "MasterUserPassword": {
-                    "Fn::GetAtt": ["CreateRandomPassword", "Password"]
+                    "Fn::GetAtt": [
+                        "CreateRandomPassword",
+                        "Password"
+                    ]
                 },
                 "ClusterParameterGroupName": {
                     "Ref": "RedshiftClusterParameterGroup"
                 },
-                "VpcSecurityGroupIds": [{
-                    "Ref": "SecurityGroup"
-                }],
+                "VpcSecurityGroupIds": [
+                    {
+                        "Ref": "SecurityGroup"
+                    }
+                ],
                 "ClusterSubnetGroupName": {
                     "Ref": "RedshiftClusterSubnetGroup"
                 },
                 "PubliclyAccessible": "false",
-                "Port": "5439"
+                "Port": "5439",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Cost Optimization: EC2 Right Sizing - RS Cluster"
+                    }
+                ]
             }
         },
         "RedshiftClusterParameterGroup": {
@@ -757,25 +811,41 @@
             "Properties": {
                 "Description": "Cluster parameter group",
                 "ParameterGroupFamily": "redshift-1.0",
-                "Parameters": [{
-                    "ParameterName": "enable_user_activity_logging",
-                    "ParameterValue": "true"
-                }]
+                "Parameters": [
+                    {
+                        "ParameterName": "enable_user_activity_logging",
+                        "ParameterValue": "true"
+                    }
+                ]
             }
         },
         "RedshiftClusterSubnetGroup": {
             "Type": "AWS::Redshift::ClusterSubnetGroup",
             "Properties": {
                 "Description": "Cluster subnet group",
-                "SubnetIds": [{
-                    "Ref": "PublicSubnet"
-                }]
+                "SubnetIds": [
+                    {
+                        "Ref": "PublicSubnet"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Cost Optimization: EC2 Right Sizing - RS Cluster Subnet Group"
+                    }
+                ]
             }
         },
         "VPC": {
             "Type": "AWS::EC2::VPC",
             "Properties": {
-                "CidrBlock": "10.0.0.0/16"
+                "CidrBlock": "10.0.0.0/16",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Cost Optimization: EC2 Right Sizing - VPC"
+                    }
+                ]
             }
         },
         "PublicSubnet": {
@@ -783,34 +853,59 @@
             "Properties": {
                 "CidrBlock": "10.0.0.0/24",
                 "AvailabilityZone": {
-                    "Fn::Select": ["1", {
-                        "Fn::GetAZs": ""
-                    }]
+                    "Fn::Select": [
+                        "0",
+                        {
+                            "Fn::GetAZs": ""
+                        }
+                    ]
                 },
                 "VpcId": {
                     "Ref": "VPC"
-                }
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Cost Optimization: EC2 Right Sizing - Subnet"
+                    }
+                ]
             }
         },
         "SecurityGroup": {
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
                 "GroupDescription": "Security group",
-                "SecurityGroupIngress": [{
-                    "SourceSecurityGroupId": {
-                        "Ref": "EC2InstanceSecurityGroup"
-                    },
-                    "FromPort": "5439",
-                    "ToPort": "5439",
-                    "IpProtocol": "tcp"
-                }],
+                "SecurityGroupIngress": [
+                    {
+                        "SourceSecurityGroupId": {
+                            "Ref": "EC2InstanceSecurityGroup"
+                        },
+                        "FromPort": "5439",
+                        "ToPort": "5439",
+                        "IpProtocol": "tcp"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Cost Optimization: EC2 Right Sizing - Security Group"
+                    }
+                ],
                 "VpcId": {
                     "Ref": "VPC"
                 }
             }
         },
         "myInternetGateway": {
-            "Type": "AWS::EC2::InternetGateway"
+            "Type": "AWS::EC2::InternetGateway",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Cost Optimization: EC2 Right Sizing - Internet Gateway"
+                    }
+                ]
+            }
         },
         "AttachGateway": {
             "Type": "AWS::EC2::VPCGatewayAttachment",
@@ -828,7 +923,13 @@
             "Properties": {
                 "VpcId": {
                     "Ref": "VPC"
-                }
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Cost Optimization: EC2 Right Sizing - Route Table"
+                    }
+                ]
             }
         },
         "PublicRoute": {
@@ -860,36 +961,51 @@
             "Properties": {
                 "AssumeRolePolicyDocument": {
                     "Version": "2012-10-17",
-                    "Statement": [{
-                        "Effect": "Allow",
-                        "Principal": {
-                            "Service": "lambda.amazonaws.com"
-                        },
-                        "Action": "sts:AssumeRole"
-                    }]
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            },
+                            "Action": "sts:AssumeRole"
+                        }
+                    ]
                 },
                 "Path": "/",
-                "Policies": [{
-                    "PolicyName": "Solution_Helper_Permissions",
-                    "PolicyDocument": {
-                        "Version": "2012-10-17",
-                        "Statement": [{
-                            "Effect": "Allow",
-                            "Action": [
-                                "logs:CreateLogGroup",
-                                "logs:CreateLogStream",
-                                "logs:PutLogEvents"
-                            ],
-                            "Resource": {
-                                "Fn::Join": ["", ["arn:aws:logs:", {
-                                    "Ref": "AWS::Region"
-                                }, ":", {
-                                    "Ref": "AWS::AccountId"
-                                }, ":log-group:/aws/lambda/*"]]
-                            }
-                        }]
+                "Policies": [
+                    {
+                        "PolicyName": "Solution_Helper_Permissions",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "logs:CreateLogGroup",
+                                        "logs:CreateLogStream",
+                                        "logs:PutLogEvents"
+                                    ],
+                                    "Resource": {
+                                        "Fn::Join": [
+                                            "",
+                                            [
+                                                "arn:aws:logs:",
+                                                {
+                                                    "Ref": "AWS::Region"
+                                                },
+                                                ":",
+                                                {
+                                                    "Ref": "AWS::AccountId"
+                                                },
+                                                ":log-group:/aws/lambda/*"
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
                     }
-                }]
+                ]
             }
         },
         "SolutionHelper": {
@@ -897,14 +1013,19 @@
             "Properties": {
                 "Handler": "solution-helper.lambda_handler",
                 "Role": {
-                    "Fn::GetAtt": ["SolutionHelperRole", "Arn"]
+                    "Fn::GetAtt": [
+                        "SolutionHelperRole",
+                        "Arn"
+                    ]
                 },
                 "Description": "This function creates a CloudFormation custom lambda resource that creates custom lambda functions by finding and replacing specific values from existing lambda function code.",
                 "Code": {
                     "S3Bucket": {
                         "Fn::Join": [
-                            "", [
-                                "solutions-", {
+                            "",
+                            [
+                                "solutions-",
+                                {
                                     "Ref": "AWS::Region"
                                 }
                             ]
@@ -936,7 +1057,10 @@
             "Type": "Custom::LoadLambda",
             "Properties": {
                 "ServiceToken": {
-                    "Fn::GetAtt": ["SolutionHelper", "Arn"]
+                    "Fn::GetAtt": [
+                        "SolutionHelper",
+                        "Arn"
+                    ]
                 },
                 "Region": {
                     "Ref": "AWS::Region"
@@ -949,15 +1073,20 @@
             "Condition": "SendData",
             "Properties": {
                 "ServiceToken": {
-                    "Fn::GetAtt": ["SolutionHelper", "Arn"]
+                    "Fn::GetAtt": [
+                        "SolutionHelper",
+                        "Arn"
+                    ]
                 },
                 "SendAnonymousData": {
                     "Fn::Join": [
-                        "", [
+                        "",
+                        [
                             "{ 'Solution' : '",
                             "SO00011",
                             "', ",
-                            "'UUID' : '", {
+                            "'UUID' : '",
+                            {
                                 "Fn::GetAtt": [
                                     "CreateUniqueID",
                                     "UUID"
@@ -965,7 +1094,8 @@
                             },
                             "', ",
                             "'Data': {",
-                            "'TerminateResources': '", {
+                            "'TerminateResources': '",
+                            {
                                 "Ref": "TerminateResources"
                             },
                             "'",
@@ -981,11 +1111,23 @@
         "ClusterEndpoint": {
             "Description": "Cluster endpoint",
             "Value": {
-                "Fn::Join": [":", [{
-                    "Fn::GetAtt": ["RedshiftCluster", "Endpoint.Address"]
-                }, {
-                    "Fn::GetAtt": ["RedshiftCluster", "Endpoint.Port"]
-                }]]
+                "Fn::Join": [
+                    ":",
+                    [
+                        {
+                            "Fn::GetAtt": [
+                                "RedshiftCluster",
+                                "Endpoint.Address"
+                            ]
+                        },
+                        {
+                            "Fn::GetAtt": [
+                                "RedshiftCluster",
+                                "Endpoint.Port"
+                            ]
+                        }
+                    ]
+                ]
             }
         },
         "ClusterName": {
@@ -999,7 +1141,6 @@
             "Value": {
                 "Ref": "S3Bucket"
             }
-
         },
         "UUID": {
             "Description": "Newly created random anonymous UUID.",
