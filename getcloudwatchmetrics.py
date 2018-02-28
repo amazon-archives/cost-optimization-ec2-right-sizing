@@ -115,22 +115,23 @@ def getMetrics(intNow, startTime, endTime, period, statistics, unit, metrics, ou
                 print(e)
 
     for row in output:
-        res += u"\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\",\"{10}\",\"{11}\",\"{12}\",\"{13}\",\"{14}\",\"{15}\"\n".format(output[row]["humanReadableTimestamp"], \
-                                                                                output[row]["timestamp"],\
-                                                                                output[row]["accountId"],\
-                                                                                output[row]["az"],\
-                                                                                output[row]["instanceId"],\
-                                                                                output[row]["instanceType"],\
-                                                                                output[row]["instanceTags"],\
-                                                                                output[row]["ebsBacked"],\
-                                                                                output[row]["volumeIds"],\
-                                                                                output[row]["instanceLaunchTime"],\
-                                                                                output[row]["humanReadableInstanceLaunchTime"],\
-                                                                                output[row]["CPUUtilization"],\
-                                                                                output[row]["NetworkIn"],\
-                                                                                output[row]["NetworkOut"],\
-                                                                                output[row]["DiskReadOps"],\
-                                                                                output[row]["DiskWriteOps"])
+        res += u"\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\",\"{10}\",\"{11}\",\"{12}\",\"{13}\",\"{14}\",\"{15}\"\n".format(\
+                                                                                output[row].setdefault("humanReadableTimestamp",""),\
+                                                                                output[row].setdefault("timestamp",""),\
+                                                                                output[row].setdefault("accountId",""),\
+                                                                                output[row].setdefault("az",""),\
+                                                                                output[row].setdefault("instanceId",""),\
+                                                                                output[row].setdefault("instanceType",""),\
+                                                                                output[row].setdefault("instanceTags",""),\
+                                                                                output[row].setdefault("ebsBacked",""),\
+                                                                                output[row].setdefault("volumeIds",""),\
+                                                                                output[row].setdefault("instanceLaunchTime",""),\
+                                                                                output[row].setdefault("humanReadableInstanceLaunchTime",""),\
+                                                                                output[row].setdefault("CPUUtilization","0"),\
+                                                                                output[row].setdefault("NetworkIn","0"),\
+                                                                                output[row].setdefault("NetworkOut","0"),\
+                                                                                output[row].setdefault("DiskReadOps","0"),\
+                                                                                output[row].setdefault("DiskWriteOps","0"))
     return res
 
 # Main
