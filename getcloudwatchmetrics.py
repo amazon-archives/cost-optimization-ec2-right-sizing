@@ -1,11 +1,11 @@
 ######################################################################################################################
-#  Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.                                           #
+#  Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.                                           #
 #                                                                                                                    #
 #  Licensed under the Amazon Software License (the "License"). You may not use this file except in compliance        #
 #  with the License. A copy of the License is located at                                                             #
 #                                                                                                                    #
 #      http://aws.amazon.com/asl/                                                                                    #
-#                                                                                                                    #   
+#                                                                                                                    #
 #  or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES #
 #  OR CONDITIONS OF ANY KIND, express or implied. See the License for the specific language governing permissions    #
 #  and limitations under the License.                                                                                #
@@ -88,7 +88,7 @@ def getMetrics(intNow, startTime, endTime, period, statistics, unit, metrics, ou
                     tagString = ""
                     ebsString = ""
 
-                    if instance["Tags"]:
+                    if instance.get('Tags',"None") <> "None":
                         for tag in instance["Tags"]:
                             tagString += re.sub('[^a-zA-Z0-9-_ *.]', '', tag["Key"].replace(",", " ")) + ":" + re.sub('[^a-zA-Z0-9-_ *.]', '', tag["Value"].replace(",", " ")) + " | "
                         tagString = tagString[:-3]
@@ -115,23 +115,23 @@ def getMetrics(intNow, startTime, endTime, period, statistics, unit, metrics, ou
                 print(e)
 
     for row in output:
-        res += u"\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\",\"{10}\",\"{11}\",\"{12}\",\"{13}\",\"{14}\",\"{15}\"\n".format(\
-                                                                                output[row].setdefault("humanReadableTimestamp",""),\
-                                                                                output[row].setdefault("timestamp",""),\
-                                                                                output[row].setdefault("accountId",""),\
-                                                                                output[row].setdefault("az",""),\
-                                                                                output[row].setdefault("instanceId",""),\
-                                                                                output[row].setdefault("instanceType",""),\
-                                                                                output[row].setdefault("instanceTags",""),\
-                                                                                output[row].setdefault("ebsBacked",""),\
-                                                                                output[row].setdefault("volumeIds",""),\
-                                                                                output[row].setdefault("instanceLaunchTime",""),\
-                                                                                output[row].setdefault("humanReadableInstanceLaunchTime",""),\
-                                                                                output[row].setdefault("CPUUtilization","0"),\
-                                                                                output[row].setdefault("NetworkIn","0"),\
-                                                                                output[row].setdefault("NetworkOut","0"),\
-                                                                                output[row].setdefault("DiskReadOps","0"),\
-                                                                                output[row].setdefault("DiskWriteOps","0"))
+       res += u"\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\",\"{10}\",\"{11}\",\"{12}\",\"{13}\",\"{14}\",\"{15}\"\n".format(\
+                                                                            output[row].setdefault("humanReadableTimestamp",""),\
+                                                                            output[row].setdefault("timestamp",""),\
+                                                                            output[row].setdefault("accountId",""),\
+                                                                            output[row].setdefault("az",""),\
+                                                                            output[row].setdefault("instanceId",""),\
+                                                                            output[row].setdefault("instanceType",""),\
+                                                                            output[row].setdefault("instanceTags",""),\
+                                                                            output[row].setdefault("ebsBacked",""),\
+                                                                            output[row].setdefault("volumeIds",""),\
+                                                                            output[row].setdefault("instanceLaunchTime",""),\
+                                                                            output[row].setdefault("humanReadableInstanceLaunchTime",""),\
+                                                                            output[row].setdefault("CPUUtilization","0"),\
+                                                                            output[row].setdefault("NetworkIn","0"),\
+                                                                            output[row].setdefault("NetworkOut","0"),\
+                                                                            output[row].setdefault("DiskReadOps","0"),\
+                                                                            output[row].setdefault("DiskWriteOps","0"))
     return res
 
 # Main

@@ -35,68 +35,36 @@
         }
     },
     "Mappings": {
-        "AWSInstanceType2Arch": {
-            "m4.large": {
-                "Arch": "HVM64"
-            }
-        },
-        "AWSRegionArch2AMI": {
-            "us-east-1": {
-                "HVM64": "ami-6057e21a"
-            },
-            "us-east-2": {
-                "HVM64": "ami-aa1b34cf"
-            },
-            "us-west-2": {
-                "HVM64": "ami-32d8124a"
-            },
-            "us-west-1": {
-                "HVM64": "ami-1a033c7a"
-            },
-            "eu-west-1": {
-                "HVM64": "ami-760aaa0f"
-            },
-            "eu-west-2": {
-                "HVM64": "ami-e3051987"
-            },
-            "eu-central-1": {
-                "HVM64": "ami-e28d098d"
-            },
-            "ap-northeast-1": {
-                "HVM64": "ami-2803ac4e"
-            },
-            "ap-northeast-2": {
-                "HVM64": "ami-fc862292"
-            },
-            "ap-southeast-1": {
-                "HVM64": "ami-dd7935be"
-            },
-            "ap-southeast-2": {
-                "HVM64": "ami-1a668878"
-            },
-            "ap-south-1": {
-                "HVM64": "ami-2ed19c41"
-            },
-            "sa-east-1": {
-                "HVM64": "ami-1678037a"
-            },
-            "ca-central-1": {
-                "HVM64": "ami-ef3b838b"
-            }
+        "AmiMap": {
+            "us-east-1": {"HVM64": "ami-97785bed"},
+            "us-east-2": {"HVM64": "ami-f63b1193"},
+            "us-west-2": {"HVM64": "ami-f2d3638a"},
+            "us-west-1": {"HVM64": "ami-824c4ee2"},
+            "ca-central-1": {"HVM64": "ami-a954d1cd"},
+            "eu-west-1": {"HVM64": "ami-d834aba1"},
+            "eu-west-2": {"HVM64": "ami-403e2524"},
+            "eu-west-3": {"HVM64": "ami-8ee056f3"},
+            "eu-central-1": {"HVM64": "ami-5652ce39"},
+            "ap-northeast-1": {"HVM64": "ami-ceafcba8"},
+            "ap-northeast-2": {"HVM64": "ami-863090e8"},
+            "ap-southeast-1": {"HVM64": "ami-68097514"},
+            "ap-southeast-2": {"HVM64": "ami-942dd1f6"},
+            "ap-south-1": {"HVM64": "ami-531a4c3c"},
+            "sa-east-1": {"HVM64": "ami-84175ae8"},
+            "cn-north-1": {"HVM64": "ami-cb19c4a6"},
+            "us-gov-west-1": {"HVM64": "ami-56f87137"}
         }
     },
     "Conditions": {
         "Terminate": {
-            "Fn::Equals": [
-                {
+            "Fn::Equals": [{
                     "Ref": "TerminateResources"
                 },
                 "Yes"
             ]
         },
         "SendData": {
-            "Fn::Equals": [
-                {
+            "Fn::Equals": [{
                     "Ref": "SendAnonymousData"
                 },
                 "Yes"
@@ -105,8 +73,7 @@
     },
     "Metadata": {
         "AWS::CloudFormation::Interface": {
-            "ParameterGroups": [
-                {
+            "ParameterGroups": [{
                     "Label": {
                         "default": "Solution Configuration"
                     },
@@ -115,8 +82,7 @@
                         "KeyName",
                         "TerminateResources"
                     ]
-                },
-                {
+                }, {
                     "Label": {
                         "default": "Anonymous Metrics Request"
                     },
@@ -124,6 +90,7 @@
                         "SendAnonymousData"
                     ]
                 }
+
             ],
             "ParameterLabels": {
                 "InboundTraffic": {
@@ -284,87 +251,52 @@
                     ]
                 },
                 "Path": "/",
-                "Policies": [
-                    {
-                        "PolicyName": "EC2InstanceRole",
-                        "PolicyDocument": {
-                            "Version": "2012-10-17",
-                            "Statement": [
-                                {
-                                    "Effect": "Allow",
-                                    "Action": [
-                                        "s3:PutObject",
-                                        "s3:PutObjectAcl",
-                                        "s3:GetObject"
-                                    ],
-                                    "Resource": {
-                                        "Fn::Join": [
-                                            "",
-                                            [
-                                                "arn:aws:s3:::",
-                                                {
-                                                    "Ref": "S3Bucket"
-                                                },
-                                                "/*"
-                                            ]
-                                        ]
-                                    }
-                                },
-                                {
-                                    "Effect": "Allow",
-                                    "Action": [
-                                        "s3:ListBucket"
-                                    ],
-                                    "Resource": {
-                                        "Fn::Join": [
-                                            "",
-                                            [
-                                                "arn:aws:s3:::",
-                                                {
-                                                    "Ref": "S3Bucket"
-                                                }
-                                            ]
-                                        ]
-                                    }
-                                },
-                                {
-                                    "Effect": "Allow",
-                                    "Action": [
-                                        "logs:CreateLogGroup",
-                                        "logs:CreateLogStream",
-                                        "logs:PutLogEvents"
-                                    ],
-                                    "Resource": {
-                                        "Fn::Join": [
-                                            "",
-                                            [
-                                                "arn:aws:logs:",
-                                                {
-                                                    "Ref": "AWS::Region"
-                                                },
-                                                ":",
-                                                {
-                                                    "Ref": "AWS::AccountId"
-                                                },
-                                                ":log-group:cost-optimization-ec2-right-sizing:*"
-                                            ]
-                                        ]
-                                    }
-                                },
-                                {
-                                    "Effect": "Allow",
-                                    "Action": [
-                                        "ec2:Describe*",
-                                        "redshift:DeleteCluster",
-                                        "ec2:TerminateInstances",
-                                        "cloudwatch:GetMetricStatistics"
-                                    ],
-                                    "Resource": "*"
-                                }
-                            ]
-                        }
+                "Policies": [{
+                    "PolicyName": "EC2InstanceRole",
+                    "PolicyDocument": {
+                        "Version": "2012-10-17",
+                        "Statement": [{
+                            "Effect": "Allow",
+          				          "Action": [
+                              "logs:CreateLogGroup",
+          		                "logs:CreateLogStream",
+          		                "logs:PutLogEvents"
+          		              ],
+          			            "Resource": { "Fn::Join" : ["", ["arn:aws:logs:",{"Ref" : "AWS::Region"},":",{ "Ref" : "AWS::AccountId" }, ":log-group:cost-optimization-ec2-right-sizing:*" ]]}
+                          }, {
+                            "Effect": "Allow",
+                            "Action": [
+                                "s3:PutObject",
+                                "s3:PutObjectAcl",
+                                "s3:GetObject"
+                            ],
+                            "Resource": {
+                                "Fn::Join": ["", ["arn:aws:s3:::", {
+                                    "Ref": "S3Bucket"
+                                }, "/*"]]
+                            }
+                          }, {
+                            "Effect": "Allow",
+                            "Action": [
+                                "s3:ListBucket"
+                            ],
+                            "Resource": {
+                                "Fn::Join": ["", ["arn:aws:s3:::", {
+                                    "Ref": "S3Bucket"
+                                }]]
+                            }
+                          }, {
+                            "Effect": "Allow",
+                            "Action": [
+                                "ec2:Describe*",
+                                "redshift:DeleteCluster",
+                                "ec2:TerminateInstances",
+                                "cloudwatch:GetMetricStatistics"
+                            ],
+                            "Resource": "*"
+                        }]
                     }
-                ]
+                }]
             }
         },
         "EC2InstanceInstanceProfile": {
@@ -381,19 +313,11 @@
         "EC2InstanceSecurityGroup": {
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
-                "GroupDescription": "Enable HTTP access via port 80 locked down to the load balancer + SSH access",
+                "GroupDescription": "Enable SSH access",
                 "VpcId": {
                     "Ref": "VPC"
                 },
                 "SecurityGroupIngress": [
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "80",
-                        "ToPort": "80",
-                        "CidrIp": {
-                            "Ref": "InboundTraffic"
-                        }
-                    },
                     {
                         "IpProtocol": "tcp",
                         "FromPort": "22",
@@ -427,7 +351,79 @@
                         ]
                     },
                     "install_cfn": {
+                        "packages": {
+                            "yum": {
+                                "python27": [],
+                                "python27-psycopg2": [],
+                                "git": [],
+                                "awslogs":[]
+                            }
+                        },
                         "files": {
+                            "/etc/awslogs/awslogs.conf": {
+                                "content": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "[general]\n",
+                                      "state_file= /var/awslogs/agent-state\n",
+                                      "[/var/log/cfn-init.log]\n",
+                                      "file = /var/log/cfn-init.log\n",
+                                      "log_group_name = cost-optimization-ec2-right-sizing\n",
+                                      "log_stream_name = {instance_id}/cfn-init.log\n",
+                                      "datetime_format = %d/%b/%Y:%H:%M:%S\n",
+                                      "[/tmp/run-rightsizing-redshift.log]\n",
+                                      "file = /tmp/run-rightsizing-redshift.log\n",
+                                      "log_group_name = cost-optimization-ec2-right-sizing\n",
+                                      "log_stream_name = {instance_id}/run-rightsizing-redshift.log\n",
+                                      "datetime_format = %d/%b/%Y:%H:%M:%S\n",
+                                      "[/tmp/]\n",
+                                      "file = /tmp/deleteandterminate.log\n",
+                                      "log_group_name = cost-optimization-ec2-right-sizing\n",
+                                      "log_stream_name = {instance_id}/deleteandterminate.log\n",
+                                      "datetime_format = %d/%b/%Y:%H:%M:%S\n",
+                                      "[/var/log/messages]\n",
+                                      "file = /var/log/messages\n",
+                                      "log_group_name = cost-optimization-ec2-right-sizing\n",
+                                      "log_stream_name = {instance_id}/messages\n",
+                                      "datetime_format = %d/%b/%Y:%H:%M:%S\n"
+                                    ]
+                                  ]
+                                },
+                                "mode": "000644",
+                                "owner": "root",
+                                "group": "root"
+                            },
+                            "/etc/awslogs/awscli.conf": {
+                                "content": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "[plugins]\n",
+                                      "cwlogs = cwlogs\n",
+                                      "[default]\n",
+                                      "region = ",
+                                      { "Ref" : "AWS::Region" }
+                                    ]
+                                  ]
+                                },
+                                "mode": "000644",
+                                "owner": "root",
+                                "group": "root"
+                            },
+                            "/var/awslogs/agent-state": {
+                                "content": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      " "
+                                    ]
+                                  ]
+                                },
+                                "mode": "000644",
+                                "owner": "root",
+                                "group": "root"
+                            },
                             "/etc/cfn/cfn-hup.conf": {
                                 "content": {
                                     "Fn::Join": [
@@ -481,6 +477,10 @@
                         },
                         "services": {
                             "sysvinit": {
+                                "awslogs": {
+                                    "enabled": "true",
+                                    "ensureRunning": "true"
+                                },
                                 "cfn-hup": {
                                     "enabled": "true",
                                     "ensureRunning": "true",
@@ -495,11 +495,9 @@
                     "install_rightsizing": {
                         "packages": {
                             "yum": {
-                                "nginx": [],
                                 "python27": [],
                                 "python27-psycopg2": [],
-                                "git": [],
-                                "awslogs": []
+                                "git": []
                             }
                         },
                         "files": {
@@ -511,18 +509,13 @@
                                             "#!/bin/bash\n",
                                             "pip install requests jmespath boto3\n",
                                             "cd /tmp\n",
-                                            "wget https://s3.amazonaws.com/solutions-reference/cost-optimization/latest/run-rightsizing-redshift.py\n",
-                                            "wget https://s3.amazonaws.com/solutions-reference/cost-optimization/latest/callgcw.py\n",
-                                            "wget https://s3.amazonaws.com/solutions-reference/cost-optimization/latest/getcloudwatchmetrics.py\n",
-                                            "wget https://s3.amazonaws.com/solutions-reference/cost-optimization/latest/deleteandterminate.py\n",
-                                            "sed -i 's/cfn_s3_bucket_name/",
-                                            {
-                                                "Fn::GetAtt": [
-                                                    "S3Bucket",
-                                                    "DomainName"
-                                                ]
-                                            },
-                                            "/g' /tmp/run-rightsizing-redshift.py\n",
+                                            "wget https://s3.amazonaws.com/%%BUCKET_NAME%%/cost-optimization/latest/run-rightsizing-redshift.py\n",
+                                            "wget https://s3.amazonaws.com/%%BUCKET_NAME%%/cost-optimization/latest/callgcw.py\n",
+                                            "wget https://s3.amazonaws.com/%%BUCKET_NAME%%/cost-optimization/latest/getcloudwatchmetrics.py\n",
+                                            "wget https://s3.amazonaws.com/%%BUCKET_NAME%%/cost-optimization/latest/deleteandterminate.py\n",
+                                            "sed -i 's/cfn_s3_bucket_name/", {
+                                                "Fn::GetAtt": ["S3Bucket", "DomainName"]
+                                            }, "/g' /tmp/run-rightsizing-redshift.py\n",
                                             "sed -i \"s/.s3.amazonaws.com//\" /tmp/run-rightsizing-redshift.py\n",
                                             "sed -i 's/cfn_account/",
                                             {
@@ -592,79 +585,6 @@
                                 "mode": "000700",
                                 "owner": "root",
                                 "group": "root"
-                            },
-                            "/etc/awslogs/awslogs.conf": {
-                                "content": {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            "[general]\n",
-                                            "state_file= /var/awslogs/agent-state\n",
-                                            "[/var/log/cfn-init.log]\n",
-                                            "file = /var/log/cfn-init.log\n",
-                                            "log_group_name = cost-optimization-ec2-right-sizing\n",
-                                            "log_stream_name = {instance_id}/cfn-init.log\n",
-                                            "datetime_format = %d/%b/%Y:%H:%M:%S\n",
-                                            "[/tmp/run-rightsizing-redshift.log]\n",
-                                            "file = /tmp/run-rightsizing-redshift.log\n",
-                                            "log_group_name = cost-optimization-ec2-right-sizing\n",
-                                            "log_stream_name = {instance_id}/run-rightsizing-redshift.log\n",
-                                            "datetime_format = %d/%b/%Y:%H:%M:%S\n",
-                                            "[/tmp/deleteandterminate.log]\n",
-                                            "file = /tmp/deleteandterminate.log\n",
-                                            "log_group_name = cost-optimization-ec2-right-sizing\n",
-                                            "log_stream_name = {instance_id}/deleteandterminate.log\n",
-                                            "datetime_format = %d/%b/%Y:%H:%M:%S\n"
-                                        ]
-                                    ]
-                                },
-                                "mode": "000644",
-                                "owner": "root",
-                                "group": "root"
-                            },
-                            "/etc/awslogs/awscli.conf": {
-                                "content": {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            "[plugins]\n",
-                                            "cwlogs = cwlogs\n",
-                                            "[default]\n",
-                                            "region = ",
-                                            {
-                                                "Ref": "AWS::Region"
-                                            }
-                                        ]
-                                    ]
-                                },
-                                "mode": "000644",
-                                "owner": "root",
-                                "group": "root"
-                            },
-                            "/var/awslogs/agent-state": {
-                                "content": {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            " "
-                                        ]
-                                    ]
-                                },
-                                "mode": "000644",
-                                "owner": "root",
-                                "group": "root"
-                            }
-                        },
-                        "services": {
-                            "sysvinit": {
-                                "nginx": {
-                                    "enabled": "true",
-                                    "ensureRunning": "true"
-                                },
-                                "awslogs": {
-                                    "enabled": "true",
-                                    "ensureRunning": "true"
-                                }
                             }
                         }
                     },
@@ -679,21 +599,7 @@
                 }
             },
             "Properties": {
-                "ImageId": {
-                    "Fn::FindInMap": [
-                        "AWSRegionArch2AMI",
-                        {
-                            "Ref": "AWS::Region"
-                        },
-                        {
-                            "Fn::FindInMap": [
-                                "AWSInstanceType2Arch",
-                                "m4.large",
-                                "Arch"
-                            ]
-                        }
-                    ]
-                },
+                "ImageId": { "Fn::FindInMap" : [ "AmiMap", { "Ref" : "AWS::Region" }, "HVM64"]},
                 "InstanceType": "m4.large",
                 "IamInstanceProfile": {
                     "Ref": "EC2InstanceInstanceProfile"
@@ -715,6 +621,9 @@
                 "KeyName": {
                     "Ref": "KeyName"
                 },
+                "Tags" : [
+                  { "Key" : "Name", "Value" : "EC2 Right Sizing Worker" }
+                ],
                 "UserData": {
                     "Fn::Base64": {
                         "Fn::Join": [
@@ -767,6 +676,9 @@
             "DependsOn": "AttachGateway",
             "Properties": {
                 "ClusterType": "multi-node",
+                "Tags" : [
+                  { "Key" : "Name", "Value" : "EC2 Right Sizing Cluster" }
+                ],
                 "AvailabilityZone": {
                     "Fn::Select": [
                         "0",
