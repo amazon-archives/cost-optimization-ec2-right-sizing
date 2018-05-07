@@ -26,10 +26,9 @@ import datetime
 import codecs
 
 account = ""
+instanceNum = {}
 
-def getInstances(arguments):
-    account = arguments[0]
-    region = arguments[1]
+def getInstances(region):
     ec2 = boto3.resource('ec2',region_name=region)
     json_result = []
     runningInstances = []
@@ -51,6 +50,8 @@ def getInstances(arguments):
     return runningInstances
 
 def getMetrics(intNow, startTime, endTime, period, statistics, unit, metrics, outputName, instance):
+    global instanceNum
+    instanceNum[instance["InstanceId"]] = 1
     res = ""
     output = {}
     for metric in metrics:
@@ -64,20 +65,34 @@ def getMetrics(intNow, startTime, endTime, period, statistics, unit, metrics, ou
             "namespace": "AWS/EC2",
             "unit": unit[metric]
         }
+        logging.info("instance %s (%s)" % (instance["InstanceId"], len(instanceNum)))
+        logging.info("metric %s" % (metric))
 
-        cloudwatch = boto3.resource('cloudwatch',region_name=instance["Placement"]["AvailabilityZone"][:-1])
+        numRetries = 0
+        gettingMetrics = True
+        while gettingMetrics:
+        	try:
+                    session = boto3.session.Session(region_name=instance["Placement"]["AvailabilityZone"][:-1])
+                    cloudwatch = session.resource('cloudwatch')
+                    json_result = cloudwatch.meta.client.get_metric_statistics(Dimensions=args['dimensions'],
+                                                                       StartTime=datetime.datetime.fromtimestamp(args['startTime']/1e3).strftime("%Y-%m-%d %H:%M:%S"),
+                                                                       EndTime=datetime.datetime.fromtimestamp(args['endTime']/1e3).strftime("%Y-%m-%d %H:%M:%S"),
+                                                                       Period=args['period'],
+                                                                       Statistics=args['statistics'],
+                                                                       MetricName=args['metricName'],
+                                                                       Namespace=args['namespace'],
+                                                                       Unit=args['unit'])
+                    gettingMetrics = False
+        	except Exception as e:
+                    numRetries+=1
+                    logging.error("Getting CW metric %s try %s of 3" % (args['metricName'], numRetries))
+                    logging.error("Exception: %s" % (e))
+                    if numRetries > 3:
+                        gettingMetrics = False
+                        raise
+                    time.sleep(1)
 
-        json_result = cloudwatch.meta.client.get_metric_statistics(Dimensions=args['dimensions'],
-                                                                   StartTime=datetime.datetime.fromtimestamp(args['startTime']/1e3).strftime("%Y-%m-%d %H:%M:%S"),
-                                                                   EndTime=datetime.datetime.fromtimestamp(args['endTime']/1e3).strftime("%Y-%m-%d %H:%M:%S"),
-                                                                   Period=args['period'],
-                                                                   Statistics=args['statistics'],
-                                                                   MetricName=args['metricName'],
-                                                                   Namespace=args['namespace'],
-                                                                   Unit=args['unit'])
-
-
-        #print json_result
+        #logging.info("metric_stats %s" % (json_result))
         for datapoint in json_result['Datapoints']:
             try:
                 if(str(datapoint['Timestamp']) in output):
@@ -136,7 +151,8 @@ def getMetrics(intNow, startTime, endTime, period, statistics, unit, metrics, ou
 
 # Main
 def download_metrics(p_region, p_account, p_mode, p_statistics, p_period, p_starttime, p_endtime, p_output):
-    logging.basicConfig(level=logging.INFO)
+
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s')
 
     region = p_region
     account = p_account
@@ -175,11 +191,6 @@ def download_metrics(p_region, p_account, p_mode, p_statistics, p_period, p_star
     logging.info("output %s " % (outputName))
 
     outfile = codecs.open(outputName, 'a', encoding='utf-8')
-    outfile.write(
-        u"\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\",\"{10}\",\"{11}\",\"{12}\",\"{13}\",\"{14}\",\"{15}\"\n".format(
-            "humanReadableTimestamp", "timestamp", "accountId", "az", "instanceId", "instanceType", "instanceTags",
-            "ebsBacked", "volumeIds", "instanceLaunchTime", "humanReadableInstanceLaunchTime", "CPUUtilization",
-            "NetworkIn", "NetworkOut", "DiskReadOps", "DiskWriteOps"))
 
     if (p_mode == 'single'):
         accounts = p_account
@@ -187,16 +198,10 @@ def download_metrics(p_region, p_account, p_mode, p_statistics, p_period, p_star
         logging.error('Mode is not correct')
 
     p = multiprocessing.Pool(multiprocessing.cpu_count() - 1)
-    response = p.map(getInstances, list(itertools.product(accounts, region)))
-    response = [item for sublist in response for item in sublist]
+    func = partial(getMetrics, intNow, startTime, endTime, period, statistics, unit, metrics, outputName)
+    response = p.map(func, getInstances(region[0]))
     p.close()
     p.join()
-
-    p2 = multiprocessing.Pool(multiprocessing.cpu_count() - 1)
-    func = partial(getMetrics, intNow, startTime, endTime, period, statistics, unit, metrics, outputName)
-    response = p2.map(func, response)
-    p2.close()
-    p2.join()
 
     for line in response:
         outfile.write(line)

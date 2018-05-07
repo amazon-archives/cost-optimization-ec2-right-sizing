@@ -134,7 +134,7 @@ def import_cwdata(db_conn, sourcefile, ignorerows, gzflag):
     ls_create_cwtab_sql += " humanReadableTimestamp varchar(300), "
     ls_create_cwtab_sql += " timestamp varchar(300), accountId varchar(300), "
     ls_create_cwtab_sql += " az varchar(300), instanceId varchar(300) distkey, "
-    ls_create_cwtab_sql += " instanceType varchar(300), instanceTags varchar(1000), "
+    ls_create_cwtab_sql += " instanceType varchar(300), instanceTags varchar(max), "
     ls_create_cwtab_sql += " ebsBacked varchar(300), volumeIds varchar(1024), "
     ls_create_cwtab_sql += " instanceLaunchTime varchar(300), humanReadableInstanceLaunchTime varchar(300), "
     ls_create_cwtab_sql += " CPUUtilization varchar(300), NetworkIn varchar(300), "
@@ -145,7 +145,7 @@ def import_cwdata(db_conn, sourcefile, ignorerows, gzflag):
     return ls_temp_cw_table
 
 def download_ec2pricelist():
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s')
     ls_pricelist_file = 'ec2pricelist.csv'
     if os.path.exists(ls_pricelist_file):
         if CURRENTOS == "Linux":
@@ -178,7 +178,7 @@ def download_ec2pricelist():
     return ls_pricelist_file
 
 def import_ec2pricelist(db_conn, p_ec2pricelist_file):
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s')
     ls_pricelist_file = p_ec2pricelist_file
 
     ls_columns = linecache.getline(ls_pricelist_file, 6)
@@ -304,7 +304,7 @@ def right_sizing(db_conn, pricelist_table, cw_tablename):
     ls_gen_list_sql += " and a.instancetype=b.instancetype "
     ls_gen_list_sql += " and upper(substring(a.az,1,2))||upper(substring(a.az,4,1))|| substring(substring(a.az, position('-' in a.az)+1),position('-' in substring(a.az, position('-' in a.az)+1))+1,1)=b.regionabbr "
     ls_gen_list_sql += " and b.termtype='OnDemand' and b.location<>'AWS GovCloud (US)' and b.servicecode='AmazonEC2' "
-    ls_gen_list_sql += " and b.tenancy='Shared' and b.processorarchitecture='64-bit' and b.operatingsystem='Linux' "
+    ls_gen_list_sql += " and b.tenancy='Shared' and b.processorarchitecture='64-bit' and b.operatingsystem='Linux' and b.preinstalledsw='NA'"
     ls_gen_list_sql += " group by upper(substring(a.az,1,2))||upper(substring(a.az,4,1))|| substring(substring(a.az, position('-' in a.az)+1),position('-' in substring(a.az, position('-' in a.az)+1))+1,1), "
     ls_gen_list_sql += " a.instancetype, b.vcpu, b.memory, b.storage, b.networkperformance, b.priceperunit, a.instanceid, a.instancetags"
 
@@ -415,7 +415,7 @@ def dump_results(db_conn, sql_stat, csv_filename):
 
 # Main
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s')
 
     logging.info("Downloading the CloudWatch metrics")
     sys.path.append('callgcw.py')

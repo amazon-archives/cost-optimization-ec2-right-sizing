@@ -21,7 +21,7 @@ CW_REGION = "cfn_region"
 DB_CLID = "cfn_db_clusteridentifier"
 # Main
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s')
 
     logging.info("Deleting the redshift cluster")
     rs = boto3.client('redshift',CW_REGION)

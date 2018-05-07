@@ -18,6 +18,8 @@ import string, os, sys
 import time
 import platform
 from argparse import ArgumentParser
+import codecs
+
 
 CW_REGION = "cfn_region"
 
@@ -37,7 +39,7 @@ def call_gcw(p_region, p_account, p_mode, p_statistics, p_period, p_starttime, p
     sys.path.append('getcloudwatchmetrics.py')
     import getcloudwatchmetrics
 
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s')
 
     ec2 = boto3.client('ec2',region_name=CW_REGION)
     awsregions = ec2.describe_regions()['Regions']
@@ -53,6 +55,13 @@ def call_gcw(p_region, p_account, p_mode, p_statistics, p_period, p_starttime, p
 
     ls_today = time.strftime('%Y-%m-%d',time.localtime(time.time()))
     ls_combined_csv = ls_today + "-before" + str(p_starttime) +"hour-with" + str(p_period) + "min.csv"
+    outfile = codecs.open(ls_combined_csv, 'a', encoding='utf-8')
+    outfile.write(
+        u"\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\",\"{10}\",\"{11}\",\"{12}\",\"{13}\",\"{14}\",\"{15}\"\n".format(
+            "humanReadableTimestamp", "timestamp", "accountId", "az", "instanceId", "instanceType", "instanceTags",
+            "ebsBacked", "volumeIds", "instanceLaunchTime", "humanReadableInstanceLaunchTime", "CPUUtilization",
+            "NetworkIn", "NetworkOut", "DiskReadOps", "DiskWriteOps"))
+    outfile.close()
     #separate multiple regions to call pt-cwatch.py one region by one region
     for i in awsregions:
         ls_single_region = i['RegionName']
