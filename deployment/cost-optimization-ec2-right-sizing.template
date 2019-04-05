@@ -233,6 +233,12 @@
         },
         "EC2InstanceRole": {
             "Type": "AWS::IAM::Role",
+            "Metadata": {
+            "cfn_nag":{
+                "rules_to_suppress": [{
+                "id":"F3",
+                "reason":"reviewed permission needed for multiple resources"}]
+            }},
             "Properties": {
                 "AssumeRolePolicyDocument": {
                     "Version": "2012-10-17",
@@ -312,6 +318,12 @@
         },
         "EC2InstanceSecurityGroup": {
             "Type": "AWS::EC2::SecurityGroup",
+            "Metadata": {
+            "cfn_nag":{
+                "rules_to_suppress": [{
+                "id":"F1000",
+                "reason":"reviewed security group"}]
+            }},
             "Properties": {
                 "GroupDescription": "Enable SSH access",
                 "VpcId": {
@@ -509,10 +521,10 @@
                                             "#!/bin/bash\n",
                                             "pip install requests jmespath boto3\n",
                                             "cd /tmp\n",
-                                            "wget https://s3.amazonaws.com/%%BUCKET_NAME%%/cost-optimization/latest/run-rightsizing-redshift.py\n",
-                                            "wget https://s3.amazonaws.com/%%BUCKET_NAME%%/cost-optimization/latest/callgcw.py\n",
-                                            "wget https://s3.amazonaws.com/%%BUCKET_NAME%%/cost-optimization/latest/getcloudwatchmetrics.py\n",
-                                            "wget https://s3.amazonaws.com/%%BUCKET_NAME%%/cost-optimization/latest/deleteandterminate.py\n",
+                                            "wget https://s3.amazonaws.com/%%BUCKET_NAME%%/cost-optimization/%%VERSION%%/run-rightsizing-redshift.py\n",
+                                            "wget https://s3.amazonaws.com/%%BUCKET_NAME%%/cost-optimization/%%VERSION%%/callgcw.py\n",
+                                            "wget https://s3.amazonaws.com/%%BUCKET_NAME%%/cost-optimization/%%VERSION%%/getcloudwatchmetrics.py\n",
+                                            "wget https://s3.amazonaws.com/%%BUCKET_NAME%%/cost-optimization/%%VERSION%%/deleteandterminate.py\n",
                                             "sed -i 's/cfn_s3_bucket_name/", {
                                                 "Fn::GetAtt": ["S3Bucket", "DomainName"]
                                             }, "/g' /tmp/run-rightsizing-redshift.py\n",
@@ -785,6 +797,12 @@
         },
         "SecurityGroup": {
             "Type": "AWS::EC2::SecurityGroup",
+            "Metadata": {
+            "cfn_nag":{
+                "rules_to_suppress": [{
+                "id":"F1000",
+                "reason":"reviewed security group"}]
+            }},
             "Properties": {
                 "GroupDescription": "Security group",
                 "SecurityGroupIngress": [

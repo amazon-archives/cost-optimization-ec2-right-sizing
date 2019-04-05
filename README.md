@@ -2,13 +2,13 @@
 Source code for the AWS solution "Cost Optimization: EC2 Right Sizing". Please see the main solution for the [Cost Optimization: EC2 Right Sizing](https://aws.amazon.com/answers/account-management/cost-optimization-ec2-right-sizing/).
 
 ## Cloudformation template
-
+/deployment
 - cost-optimization-ec2-right-sizing.template
 
-You will need to replace %%BUCKET_NAME%% in the template to point to the bucket where you put your own copies of the Python source code below.
+You will need to replace %%BUCKET_NAME%% & %%VERSION%% in the template to point to the bucket where you put your own copies of the Python source code below.
 
 ## Python source code
-
+/source
 - callgcw.py
 - deleteandterminate.py
 - getcloudwatchmetrics.py
