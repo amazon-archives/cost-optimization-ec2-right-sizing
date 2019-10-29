@@ -1,0 +1,6 @@
+**/dist
+**/.zip
+**/.DS_Store
+**/open-source
+*.orig
+source/local-solution-helper.zip

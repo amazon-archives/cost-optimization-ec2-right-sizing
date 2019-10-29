@@ -1,15 +1,16 @@
-######################################################################################################################
-#  Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.                                           #
-#                                                                                                                    #
-#  Licensed under the Amazon Software License (the "License"). You may not use this file except in compliance        #
-#  with the License. A copy of the License is located at                                                             #
-#                                                                                                                    #
-#      http://aws.amazon.com/asl/                                                                                    #
-#                                                                                                                    #
-#  or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES #
-#  OR CONDITIONS OF ANY KIND, express or implied. See the License for the specific language governing permissions    #
-#  and limitations under the License.                                                                                #
-######################################################################################################################
+#!/usr/bin/python
+######################################################################################################################  
+#  Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.                                           #  
+#                                                                                                                    #  
+#  Licensed under the Apache License Version 2.0 (the "License"). You may not use this file except in compliance     #  
+#  with the License. A copy of the License is located at                                                             #  
+#                                                                                                                    #  
+#      http://www.apache.org/licenses/                                                                               #  
+#                                                                                                                    #  
+#  or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES #  
+#  OR CONDITIONS OF ANY KIND, express or implied. See the License for the specific language governing permissions    #  
+#  and limitations under the License.                                                                                #  
+###################################################################################################################### 
 
 import boto3
 import json
@@ -71,26 +72,27 @@ def getMetrics(intNow, startTime, endTime, period, statistics, unit, metrics, ou
         numRetries = 0
         gettingMetrics = True
         while gettingMetrics:
-        	try:
-                    session = boto3.session.Session(region_name=instance["Placement"]["AvailabilityZone"][:-1])
-                    cloudwatch = session.resource('cloudwatch')
-                    json_result = cloudwatch.meta.client.get_metric_statistics(Dimensions=args['dimensions'],
-                                                                       StartTime=datetime.datetime.fromtimestamp(args['startTime']/1e3).strftime("%Y-%m-%d %H:%M:%S"),
-                                                                       EndTime=datetime.datetime.fromtimestamp(args['endTime']/1e3).strftime("%Y-%m-%d %H:%M:%S"),
-                                                                       Period=args['period'],
-                                                                       Statistics=args['statistics'],
-                                                                       MetricName=args['metricName'],
-                                                                       Namespace=args['namespace'],
-                                                                       Unit=args['unit'])
+            try:
+                session = boto3.session.Session(region_name=instance["Placement"]["AvailabilityZone"][:-1])
+                cloudwatch = session.resource('cloudwatch')
+                json_result = cloudwatch.meta.client.get_metric_statistics(
+                    Dimensions=args['dimensions'],
+                    StartTime=datetime.datetime.fromtimestamp(args['startTime']/1e3).strftime("%Y-%m-%d %H:%M:%S"),
+                    EndTime=datetime.datetime.fromtimestamp(args['endTime']/1e3).strftime("%Y-%m-%d %H:%M:%S"),
+                    Period=args['period'],
+                    Statistics=args['statistics'],
+                    MetricName=args['metricName'],
+                    Namespace=args['namespace'],
+                    Unit=args['unit'])
+                gettingMetrics = False
+            except Exception as e:
+                numRetries+=1
+                logging.error("Getting CW metric %s try %s of 3" % (args['metricName'], numRetries))
+                logging.error("Exception: %s" % (e))
+                if numRetries > 3:
                     gettingMetrics = False
-        	except Exception as e:
-                    numRetries+=1
-                    logging.error("Getting CW metric %s try %s of 3" % (args['metricName'], numRetries))
-                    logging.error("Exception: %s" % (e))
-                    if numRetries > 3:
-                        gettingMetrics = False
-                        raise
-                    time.sleep(1)
+                    raise
+                time.sleep(1)
 
         #logging.info("metric_stats %s" % (json_result))
         for datapoint in json_result['Datapoints']:
@@ -103,7 +105,7 @@ def getMetrics(intNow, startTime, endTime, period, statistics, unit, metrics, ou
                     tagString = ""
                     ebsString = ""
 
-                    if instance.get('Tags',"None") <> "None":
+                    if instance.get('Tags'):
                         for tag in instance["Tags"]:
                             tagString += re.sub('[^a-zA-Z0-9-_ *.]', '', tag["Key"].replace(",", " ")) + ":" + re.sub('[^a-zA-Z0-9-_ *.]', '', tag["Value"].replace(",", " ")) + " | "
                         tagString = tagString[:-3]

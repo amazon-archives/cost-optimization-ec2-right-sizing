@@ -1,45 +1,39 @@
 #!/usr/bin/python
-
-######################################################################################################################
-#  Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.                                           #
-#                                                                                                                    #
-#  Licensed under the Amazon Software License (the "License"). You may not use this file except in compliance        #
-#  with the License. A copy of the License is located at                                                             #
-#                                                                                                                    #
-#      http://aws.amazon.com/asl/                                                                                    #
-#                                                                                                                    #
-#  or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES #
-#  OR CONDITIONS OF ANY KIND, express or implied. See the License for the specific language governing permissions    #
-#  and limitations under the License.                                                                                #
-######################################################################################################################
+######################################################################################################################  
+#  Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.                                           #  
+#                                                                                                                    #  
+#  Licensed under the Apache License Version 2.0 (the "License"). You may not use this file except in compliance     #  
+#  with the License. A copy of the License is located at                                                             #  
+#                                                                                                                    #  
+#      http://www.apache.org/licenses/                                                                               #  
+#                                                                                                                    #  
+#  or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES #  
+#  OR CONDITIONS OF ANY KIND, express or implied. See the License for the specific language governing permissions    #  
+#  and limitations under the License.                                                                                #  
+###################################################################################################################### 
 #
 # v1.0 initial version - AWS Solutions Builders
 # v1.1 fix f1.2xlarge zero price issue - AWS Solutions Builders
 #
 ######################################################################################################################
 
-import psycopg2
 import math
-import string, os, sys
+import string
+import os
+import sys
 import csv
 import random
-import boto3
 import platform
 import linecache
 import logging
-import urllib
+import http.client
+import boto3
+import psycopg2
 
 #Global variables
 CURRENTOS = platform.system()
-if CURRENTOS == "Linux":
-    import ConfigParser
-    cf = ConfigParser.ConfigParser()
-elif CURRENTOS == "Windows":
-    import configparser
-    cf = configparser.ConfigParser()
-else:
-    logging.error("The platform %s " % (CURRENTOS) + " is not supported.")
-    exit()
+import configparser
+cf = configparser.ConfigParser()
 
 #===============================================================================
 # cf.read("resize.conf")
@@ -114,11 +108,13 @@ def copy_table(db_conn, tablename, bucketname, sourcefile, ignorerows, gzflag):
     #credentials = client.get_session_token()['Credentials']
     session = boto3.Session()
     credentials = session.get_credentials()
-    ls_aws_access_key_id=credentials.access_key
-    ls_aws_secret_access_key=credentials.secret_key
-    ls_aws_session_token=credentials.token
+    ls_aws_access_key_id = credentials.access_key
+    ls_aws_secret_access_key = credentials.secret_key
+    ls_aws_session_token = credentials.token
 
-    ls_import_pricelist_sql = "copy " + tablename + " from 's3://" + bucketname + "/" + sourcefile + "'"
+    ls_import_pricelist_sql = (
+        "copy " + tablename + " from 's3://" + bucketname + "/" + sourcefile + "'"
+        )
     ls_import_pricelist_sql += " credentials 'aws_access_key_id=" + ls_aws_access_key_id + ";aws_secret_access_key="+ ls_aws_secret_access_key + ";token=" + ls_aws_session_token + "'"
     ls_import_pricelist_sql += " delimiter ',' QUOTE AS '" + '"' + "'" + " IGNOREHEADER " + str(ignorerows)
     if gzflag=="Y":
@@ -154,22 +150,25 @@ def download_ec2pricelist():
             os.system('del ' + ls_pricelist_file)
 
     try:
-        ec2pricelist = urllib.URLopener()
-        ec2pricelist.retrieve("https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonEC2/current/index.csv","index.csv")
-        #if CURRENTOS == "Linux":
-        #    ls_download_ec2pricelist = "wget https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonEC2/current/index.csv -q"
-        #elif CURRENTOS == "Windows":
-        #    ls_download_ec2pricelist = "curl https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonEC2/current/index.csv -o index.csv"
-        #os.system(ls_download_ec2pricelist)
+        conn = http.client.HTTPSConnection(
+            'pricing.us-east-1.amazonaws.com'
+        )
+        conn.request(
+            'GET',
+            '/offers/v1.0/aws/AmazonEC2/current/index.csv'
+        )
+        resp = conn.getresponse()
+        plist = resp.read().decode('utf-8')
+        conn.close() # Be nice and close the connection when you're done
+
+        plout = open(ls_pricelist_file, 'w')
+        plout.writelines("%s" % line for line in plist)
+        plout.close()
+
     except Exception as inst:
+        print(inst)
         logging.error("Could not download the EC2 pricelist from https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonEC2/current/index.csv")
         exit()
-
-    if os.path.exists("index.csv"):
-        if CURRENTOS == "Linux":
-            os.system('mv index.csv ' + ls_pricelist_file)
-        elif CURRENTOS == "Windows":
-            os.system('rename index.csv ' + ls_pricelist_file)
 
     ls_target_bucket=S3_BUCKET
     ls_source_file = "ec2pricelist.csv"
@@ -184,10 +183,12 @@ def import_ec2pricelist(db_conn, p_ec2pricelist_file):
     ls_columns = linecache.getline(ls_pricelist_file, 6)
     logging.info("Generate Redshift table structure")
     ls_columns_list = [str(x) for x in ls_columns.split(',')]
-    if CURRENTOS == "Linux":
-        ls_temp_price_table = "pricelist" + string.join(random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 8)).replace(' ','')
-    elif CURRENTOS == "Windows":
-        ls_temp_price_table = "pricelist" + ''.join(random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 8)).replace(' ','')
+    ls_temp_price_table = (
+        "pricelist" + 
+        ''.join(random.sample(
+            ['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 8)
+            ).replace(' ','')
+        )
 
     logging.info("Importing the pricelist files to Redshift table: %s " % (ls_temp_price_table))
     ls_create_table_sql = "create table " + ls_temp_price_table + "( "
@@ -255,17 +256,26 @@ def determine_right_type(db_conn, sql_stat, s_temp_table, s_instanceid, iops_usa
             ln_min_ssd_total_size = ln_min_ssd_nbr * ln_min_ssd_size
             ln_min_ssd_total_iops = IOSP_PER_SSD * ln_min_ssd_nbr
 
-        if ln_iops_usage>3000 and ls_min_storage.find('SSD')>0:
-             if ln_min_ssd_total_iops>=ln_iops_usage and ln_min_ssd_total_size>=ln_ssd_size_usage:
-                 if ln_min_mem>=ln_mem_size:
-                     if ln_min_cpu>=ln_cpu_nbr:
-                         if ln_min_network_level>=ln_network_level_usage:
-                             if ln_min_rate<=ln_rate:
-                                 ls_update_type_sql = "update " + ls_temp_table + " set resizetype='" + ls_min_type + "', resizeprice='" + str(ln_min_rate) + "', "
-                                 ls_update_type_sql += " newvcpu='" + str(ln_min_cpu) + "', newmemory='" + str(ln_min_mem) + " GiB" + "', newstorage='" + ls_min_storage + "', newnetwork='" + ls_min_network + "' "
-                                 ls_update_type_sql += " where instanceid = '" + ls_instanceid + "'"
-                                 execute_dml_ddl(db_conn, ls_update_type_sql)
-                                 break
+        if ln_iops_usage > 3000 and ls_min_storage.find('SSD')>0:
+            if ln_min_ssd_total_iops >= ln_iops_usage and ln_min_ssd_total_size>=ln_ssd_size_usage:
+                if ln_min_mem >= ln_mem_size:
+                    if ln_min_cpu >= ln_cpu_nbr:
+                        if ln_min_network_level >= ln_network_level_usage:
+                            if ln_min_rate <= ln_rate:
+                                ls_update_type_sql = (
+                                    "update " + ls_temp_table + 
+                                    " set resizetype='" + ls_min_type + 
+                                    "', resizeprice='" + str(ln_min_rate) + "', "
+                                    )
+                                ls_update_type_sql += (
+                                    " newvcpu='" + str(ln_min_cpu) + 
+                                    "', newmemory='" + str(ln_min_mem) + 
+                                    " GiB" + "', newstorage='" + ls_min_storage + 
+                                    "', newnetwork='" + ls_min_network + "' "
+                                    )
+                                ls_update_type_sql += " where instanceid = '" + ls_instanceid + "'"
+                                execute_dml_ddl(db_conn, ls_update_type_sql)
+                                break
         else:
              if ln_min_cpu>=ln_cpu_nbr:
                  if ln_min_mem>=ln_mem_size:
@@ -280,10 +290,12 @@ def determine_right_type(db_conn, sql_stat, s_temp_table, s_instanceid, iops_usa
 
 
 def right_sizing(db_conn, pricelist_table, cw_tablename):
-    if CURRENTOS == "Linux":
-        ls_temp_table = "rightsizing" + string.join(random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 8)).replace(' ','')
-    elif CURRENTOS == "Windows":
-        ls_temp_table = "rightsizing" + ''.join(random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 8)).replace(' ','')
+    ls_temp_table = (
+        "rightsizing" + 
+        ''.join(
+            random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 8)
+            ).replace(' ','')
+        )
 
     ls_gen_list_sql = "create table " + ls_temp_table + " as "
     ls_gen_list_sql += " select upper(substring(a.az,1,2))||upper(substring(a.az,4,1))|| substring(substring(a.az, position('-' in a.az)+1),position('-' in substring(a.az, position('-' in a.az)+1))+1,1) as region, "
@@ -373,7 +385,7 @@ def right_sizing(db_conn, pricelist_table, cw_tablename):
             elif ln_network_usage>300 and ln_network_usage<=1000:
                 ln_network_level_usage = 2
             else:
-        		ln_network_level_usage = 3
+                ln_network_level_usage = 3
 
         ls_resizetype_sql = "select regionabbr, instancetype, priceperunit, storage, vcpu, "
         ls_resizetype_sql += " case when networkperformance='Low' then 1 when networkperformance='Moderate' then 2 when networkperformance='High' then 3 else 99 end as networkperformance, networkperformance as newnetwork, memory from " + pricelist_table
